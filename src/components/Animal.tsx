@@ -6,6 +6,8 @@ const [animalId, setAnimalId] = useState(0);
 
 let params = useParams();
 
+const listOfAnimals = JSON.parse(localStorage.getItem("animals") || '[]');
+
 useEffect(() => {
     if (params.id) {
     setAnimalId(parseInt(params.id));
@@ -14,6 +16,8 @@ useEffect(() => {
 
 useEffect(() => {
     console.log("Get animal with id", animalId)
+    let thisAnimal = listOfAnimals.find((element: number) => element = animalId);
+    console.log(thisAnimal);
 }, [animalId]);
 
 

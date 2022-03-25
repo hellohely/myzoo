@@ -29,8 +29,8 @@ export const Animals = () => {
 
     useEffect(() => {
         localStorage.setItem('animals', JSON.stringify(animals));
+
         needsFood();
-        
 
         if(animals.length > 0) return;
 
@@ -41,7 +41,17 @@ export const Animals = () => {
         .then((response => {
             let animalsFromAPI =
             response.data.map((animal: Animal) => {
-                return new Animal(animal.id, animal.imageUrl, animal.isFed, animal.lastFed, animal.latinName, animal.longDescription, animal.medicine, animal.name, animal.shortDescription, animal.yearOfBirth);
+                return new Animal(
+                    animal.id, 
+                    animal.imageUrl, 
+                    animal.isFed, 
+                    animal.lastFed, 
+                    animal.latinName, 
+                    animal.longDescription, 
+                    animal.medicine, 
+                    animal.name, 
+                    animal.shortDescription, 
+                    animal.yearOfBirth);
             });
 
             setAnimals(animalsFromAPI);
