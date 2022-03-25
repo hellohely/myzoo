@@ -16,7 +16,7 @@ useEffect(() => {
 
 useEffect(() => {
     console.log("Get animal with id", animalId)
-    let thisAnimal = listOfAnimals.find((element: number) => element = animalId);
+    let thisAnimal = listOfAnimals.find((el: { id: number; }) => el.id == animalId);
     console.log(thisAnimal);
 }, [animalId]);
 
