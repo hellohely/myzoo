@@ -6,8 +6,9 @@ export const Animals = () => {
     const [animals, setAnimals] = useState<Animal[]>([]);
 
     useEffect(() => {
+        localStorage.setItem('animals', JSON.stringify(animals));
         if(animals.length > 0) return;
-        
+
         axios
         .get<Animal[]>(
             "https://animals.azurewebsites.net/api/animals"
@@ -18,7 +19,7 @@ export const Animals = () => {
                 return new Animal(animal.id, animal.imageUrl, animal.isFed, animal.lastFed, animal.latinName, animal.longDescription, animal.medicine, animal.name, animal.shortDescription, animal.yearOfBirth);
             });
 
-            setAnimals(animalsFromAPI); 
+            setAnimals(animalsFromAPI);
         }));
     });
 
