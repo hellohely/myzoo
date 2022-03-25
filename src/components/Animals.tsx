@@ -1,16 +1,18 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Animal } from "../interfaces/IAnimal"
 
 export const Animals = () => {
     const [animals, setAnimals] = useState<Animal[]>([]);
-    let checkHunger: string = "";
 
     let lis = animals.map((animal, i) => {
         return (
         <li key={i}>
             <h3>{animal.name}</h3>
             <img src={animal.imageUrl}></img>
+            <p>{animal.shortDescription}</p>
+            <Link to={`/animal/${animal.id}`}>{animal.name}</Link>
             </li>);
     });
 
