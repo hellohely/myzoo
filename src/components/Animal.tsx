@@ -7,6 +7,8 @@ const [animalId, setAnimalId] = useState(0);
 let params = useParams();
 
 const listOfAnimals = JSON.parse(localStorage.getItem("animals") || '[]');
+let thisAnimal = listOfAnimals.find((animal: { id: number; }) => animal.id == animalId);
+console.log(thisAnimal);
 
 useEffect(() => {
     if (params.id) {
@@ -16,15 +18,16 @@ useEffect(() => {
 
 useEffect(() => {
     console.log("Get animal with id", animalId)
-    let thisAnimal = listOfAnimals.find((el: { id: number; }) => el.id == animalId);
-    console.log(thisAnimal);
+    
+    
 }, [animalId]);
 
 
     return(
         <div>
-        <p>Animal ID: {params.id}</p>
-        <button>Mata djuret med ID {animalId}</button>
+        <img src={thisAnimal.imageUrl}></img>
+        <p>Välkommen till {thisAnimal.name}!</p>
+        <button>Mata {thisAnimal.name}</button>
         </div>
     )
 } 
