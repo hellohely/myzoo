@@ -6,6 +6,8 @@ export const Animals = () => {
     const [animals, setAnimals] = useState<Animal[]>([]);
 
     useEffect(() => {
+        if(animals.length > 0) return;
+        
         axios
         .get<Animal[]>(
             "https://animals.azurewebsites.net/api/animals"
@@ -18,7 +20,7 @@ export const Animals = () => {
 
             setAnimals(animalsFromAPI); 
         }));
-    }, []);
+    });
 
     return(
         <p>Got { animals.length } animals</p>
