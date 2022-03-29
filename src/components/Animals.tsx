@@ -9,10 +9,8 @@ export const Animals = () => {
     let lis = animals.map((animal, i) => {
         return (
         <li key={i}>
-            <h3>{animal.name}</h3>
-            <img src={animal.imageUrl}></img>
-            <p>{animal.shortDescription}</p>
             <Link to={`/animal/${animal.id}`}>{animal.name}</Link>
+            <img src={animal.imageUrl}></img>
             </li>);
     });
 

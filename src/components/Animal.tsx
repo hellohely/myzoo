@@ -22,12 +22,21 @@ useEffect(() => {
     
 }, [animalId]);
 
+function feedAnimal() {
+    thisAnimal.isFed = true;
+    thisAnimal.lastFed = new Date();
+    let storeAnimalList = JSON.stringify(listOfAnimals);
+    localStorage.setItem("animals", storeAnimalList);
+    
+}
+
 
     return(
         <div>
         <img src={thisAnimal?.imageUrl}></img>
         <p>Välkommen till {thisAnimal?.name}!</p>
-        <button>Mata {thisAnimal?.name}</button>
+        <p>{thisAnimal?.shortDescription}</p>
+        <button onClick={feedAnimal}>Mata {thisAnimal?.name}</button>
         </div>
     )
 } 

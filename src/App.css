@@ -4,6 +4,7 @@ ul {
 
 img {
   max-height: 150px;
+  display: block;
 }
 
 li {
