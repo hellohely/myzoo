@@ -18,26 +18,27 @@ export const Animals = () => {
         animals.map((animal,i) => {
         if (animal.isFed = false) {
             console.log(animal.name + " måste matas!"); 
-        }
-        else {
-            console.log(animal.name + " är mätt.");    
         };
     })
     };
 
     useEffect(() => {
-        localStorage.setItem('animals', JSON.stringify(animals));
+        let animalsString : string = localStorage.getItem('animals') || '[]';
+        let listOfAnimals : Animal[] = JSON.parse(animalsString);
+
+        console.log("List of animals: ", listOfAnimals);
 
         needsFood();
 
         if(animals.length > 0) return;
+        if (listOfAnimals.length > 0) return;
 
         axios
         .get<Animal[]>(
             "https://animals.azurewebsites.net/api/animals"
         )
         .then((response => {
-            let animalsFromAPI =
+            listOfAnimals =
             response.data.map((animal: Animal) => {
                 return new Animal(
                     animal.id, 
@@ -52,7 +53,10 @@ export const Animals = () => {
                     animal.yearOfBirth);
             });
 
-            setAnimals(animalsFromAPI);
+            localStorage.setItem("animals", JSON.stringify(listOfAnimals));
+            const storedAnimals = JSON.parse(localStorage.getItem("animals") || '[]');
+            setAnimals(storedAnimals);
+           
             
         }));
     });
