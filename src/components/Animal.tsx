@@ -25,9 +25,9 @@ useEffect(() => {
 
     return(
         <div>
-        <img src={thisAnimal.imageUrl}></img>
-        <p>Välkommen till {thisAnimal.name}!</p>
-        <button>Mata {thisAnimal.name}</button>
+        <img src={thisAnimal?.imageUrl}></img>
+        <p>Välkommen till {thisAnimal?.name}!</p>
+        <button>Mata {thisAnimal?.name}</button>
         </div>
     )
 } 
