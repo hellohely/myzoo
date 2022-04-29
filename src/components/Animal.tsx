@@ -24,22 +24,22 @@ export function Animal() {
 
   let isFed: boolean = false;
 
-  let isFedHtml = (<p>{animal?.name} är hungrig!</p>)
+  let isFedHtml = <p>{animal?.name} är hungrig!</p>;
 
   if (animal?.isFed) {
     isFed = true;
-    isFedHtml = (<p>{animal?.name} matades senast {animal.lastFed.toLocaleString()}</p>)
+    isFedHtml = (
+      <p>
+        {animal?.name} matades senast {animal.lastFed.toLocaleString()}
+      </p>
+    );
   }
-
- 
 
   function feedAnimal() {
     if (animal && !animal.isFed) {
-      animal.isFed = true;
       thisAnimal.isFed = true;
     }
     if (animal?.lastFed) {
-      animal.lastFed = new Date();
       thisAnimal.lastFed = new Date();
     }
     localStorage.setItem("animals", JSON.stringify(animals));
@@ -53,12 +53,9 @@ export function Animal() {
       <p>Välkommen till {animal?.name}!</p>
       <p>{animal?.shortDescription}</p>
       {isFedHtml}
-      <button disabled={isFed} onClick={feedAnimal}>Mata {animal?.name}</button>
-      
+      <button disabled={isFed} onClick={feedAnimal}>
+        Mata {animal?.name}
+      </button>
     </div>
   );
 }
-function reload() {
-  throw new Error("Function not implemented.");
-}
-
