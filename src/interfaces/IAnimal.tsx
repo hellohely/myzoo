@@ -1,14 +1,12 @@
-export class Animal {
-    constructor(
-        public id: number,
-        public imageUrl: string,
-        public isFed: boolean,
-        public lastFed: Date,
-        public latinName: string,
-        public longDescription: string,
-        public medicine: string,
-        public name: string,
-        public shortDescription: string,
-        public yearOfBirth: number
-    ) {}
+export interface IAnimal {
+        id: number,
+        imageUrl: string,
+        isFed: boolean,
+        lastFed: Date,
+        latinName: string,
+        longDescription: string,
+        medicine: string,
+        name: string,
+        shortDescription: string,
+        yearOfBirth: number
 }
