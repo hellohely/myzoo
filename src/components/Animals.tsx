@@ -15,19 +15,30 @@ export function Animals() {
         if (!localStorage.getItem("animals")) {
           localStorage.setItem("animals", JSON.stringify(response.data));
         }
+
+        //Använd Local Storage-listan till setAnimals
+        setAnimals(JSON.parse(localStorage.getItem("animals") || ""));
       });
   }, []);
 
-
-
-  //Presentera djur med namn och kort beskrivning
-
-  //Skapa länk för att gå till djurets egen sida
+  //Skapa html för att presentera djur med namn och kort beskrivning
+  let lis = animals.map((animal, i) => {
+    return (
+      //Skapa länk för att gå till djurets egen sida
+      <li key={i}>
+        <Link to={`/animal/${animal.id}`}>{animal.name}</Link>
+        <img src={animal.imageUrl}></img>
+        <p>{animal.shortDescription}</p>
+      </li>
+    );
+  });
 
   return (
     <div>
       <h1>Välkommen till Djurparken!</h1>
-      <ul></ul>
+      <ul>
+          {lis}
+      </ul>
     </div>
   );
 }
