@@ -5,11 +5,12 @@ import { IAnimal } from "../interfaces/IAnimal";
 export function Animal() {
   const [animalId, setAnimalId] = useState(0);
   const [animal, setAnimal] = useState<IAnimal>();
-  let params = useParams();
-
-  const thisAnimal = JSON.parse(localStorage.getItem("animals") || "[]").find(
+  let animals = JSON.parse(localStorage.getItem("animals") || "");
+  let thisAnimal = animals.find(
     (animal: { id: number }) => animal.id == animalId
   );
+
+  let params = useParams();
 
   useEffect(() => {
     if (params.id) {
@@ -21,8 +22,28 @@ export function Animal() {
     setAnimal(thisAnimal);
   }, [animalId]);
 
+  let isFed: boolean = false;
+
+  let isFedHtml = (<p>{animal?.name} är hungrig!</p>)
+
+  if (animal?.isFed) {
+    isFed = true;
+    isFedHtml = (<p>{animal?.name} matades senast {animal.lastFed.toLocaleString()}</p>)
+  }
+
+ 
+
   function feedAnimal() {
-    console.log(thisAnimal.name, " är matad");
+    if (animal && !animal.isFed) {
+      animal.isFed = true;
+      thisAnimal.isFed = true;
+    }
+    if (animal?.lastFed) {
+      animal.lastFed = new Date();
+      thisAnimal.lastFed = new Date();
+    }
+    localStorage.setItem("animals", JSON.stringify(animals));
+    setAnimal(thisAnimal);
   }
 
   return (
@@ -31,7 +52,13 @@ export function Animal() {
       <img src={thisAnimal?.imageUrl}></img>
       <p>Välkommen till {animal?.name}!</p>
       <p>{animal?.shortDescription}</p>
-      <button onClick={feedAnimal}>Mata {animal?.name}</button>
+      {isFedHtml}
+      <button disabled={isFed} onClick={feedAnimal}>Mata {animal?.name}</button>
+      
     </div>
   );
 }
+function reload() {
+  throw new Error("Function not implemented.");
+}
+
